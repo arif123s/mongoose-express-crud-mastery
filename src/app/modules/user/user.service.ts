@@ -16,8 +16,26 @@ const getSingleUserfromDB = async (userId: string) => {
   return result;
 };
 
+const updateSingleUserfromDB = async (userId: string) => {
+  const filter = { userId: userId };
+  const update = { $set: { user: 'VALUE' } };
+
+  UserModel.updateOne(
+   filter,
+   update,
+    //  (err:string, result)=> {
+    //   if (err) {
+    //     console.error('Error updating document:', err);
+    //   } else {
+    //     console.log('Update result:', result);
+    //   }
+    // },
+  );
+};
+
 export const UserServices = {
   createUserIntoDB,
   getAllUsersfromDB,
   getSingleUserfromDB,
+  updateSingleUserfromDB,
 };
