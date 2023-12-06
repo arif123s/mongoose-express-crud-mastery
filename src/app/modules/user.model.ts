@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { Address, FullName, Orders, User } from './user/user.interface';
+// import validator from 'validator';
 
 const userNameSchema = new Schema<FullName>({
   firstName: {
@@ -7,12 +8,24 @@ const userNameSchema = new Schema<FullName>({
     required: [true, 'Username is required'],
     trim: true,
     maxlength: [20, 'Firstname can not ne more than 20 characters'],
+    // validate: {
+    //   validator: function (value: string) {
+    //     const firstNameStr = value.charAt(0).toUpperCase() + value.slice(1);
+    //     console.log(value);
+    //     return firstNameStr === value;
+    //   },
+    //   message: '{VALUE} is not in capitalize format',
+    // },
   },
   lastName: {
     type: String,
     required: [true, 'LastName is required'],
     trim: true,
     maxlength: [20, 'LastName can not ne more than 20 characters'],
+    // validate: {
+    //   validator: (value: string) => validator.isAlpha(value),
+    //   message: '{VALUE} is not valid',
+    // },
   },
 });
 
@@ -53,7 +66,14 @@ const userSchema = new Schema<User>({
     required: [true, 'FullName is required'],
   },
   age: { type: Number, required: [true, 'Age is required'] },
-  email: { type: String, required: [true, 'Email is required'] },
+  email: { 
+    type: String, 
+    required: [true, 'Email is required'] ,
+  // validate:{
+  //   validator:(value:string)=>validator.isEmail(value),
+  //   message:'{VALUE} is not a valid email type'
+  // }
+  },
   isActive: {
     type: String,
     enum: {
