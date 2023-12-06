@@ -1,5 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { Address, FullName, Orders, User } from './user/user.interface';
+import bcrypt from 'bcrypt';
+import config from '../config';
 // import validator from 'validator';
 
 const userNameSchema = new Schema<FullName>({
@@ -60,7 +62,7 @@ const ordersSchema = new Schema<Orders>({
 const userSchema = new Schema<User>({
   userId: { type: Number, required: true, unique: true },
   username: { type: String, required: [true, 'Username is required'] },
-  password: { type: String, required: [true, 'Password is required'] },
+  password: { type: String, required: [true, 'Password is required'], maxlength:[20,'Password cannot be more than 20 characters'] },
   fullName: {
     type: userNameSchema,
     required: [true, 'FullName is required'],
@@ -89,5 +91,19 @@ const userSchema = new Schema<User>({
   },
   orders: [ordersSchema],
 });
+
+//pre save middleware / hook : will work on create() save()
+userSchema.pre('save',function(){
+// console.log(this,'pre hook : we will save data');
+
+// hashing password and save into DB
+const user = this
+bcrypt.hash(user.password,Number(config.bcrypt_salt_rounds))
+})
+
+//post save middleware / hook
+userSchema.pre('save',function(){
+console.log(this,'post hook : we saved our data');
+})
 
 export const UserModel = model<User>('User', userSchema);

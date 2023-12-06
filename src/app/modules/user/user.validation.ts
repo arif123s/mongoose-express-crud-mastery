@@ -33,7 +33,13 @@ const ordersValidationSchema = Joi.object({
 const userValidationSchema = Joi.object({
   userId: Joi.number().required(),
   username: Joi.string().required(),
-  password: Joi.string().required(),
+  password: Joi.string()
+    .required()
+    .messages({
+      'any.required': 'Password is required',
+      'string.max': 'Password cannot be more than 20 characters',
+    })
+    .max(20),
   fullName: fullNameValidationSchema.required(),
   age: Joi.number().required(),
   email: Joi.string()
