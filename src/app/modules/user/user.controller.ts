@@ -4,13 +4,12 @@ import userValidationSchema from './user.validation';
 
 const createUser = async (req: Request, res: Response) => {
   try {
-
     const { user: userData } = req.body;
 
     // data validation using joi
     const { error, value } = userValidationSchema.validate(userData);
 
-     const result = await UserServices.createUserIntoDB(value);
+    const result = await UserServices.createUserIntoDB(value);
 
     if (error) {
       res.status(500).json({
@@ -19,7 +18,6 @@ const createUser = async (req: Request, res: Response) => {
         error,
       });
     }
-
 
     res.status(200).json({
       success: true,
@@ -44,10 +42,11 @@ const getAllUsers = async (req: Request, res: Response) => {
       message: 'Users are retrieved successfully',
       data: result,
     });
-  } catch (err:any) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message||'Something went wrong!',
+      message: err.message || 'Something went wrong!',
       error: err,
     });
   }
@@ -63,7 +62,8 @@ const getSingleUser = async (req: Request, res: Response) => {
       message: 'User is retrieved successfully',
       data: result,
     });
-  } catch (err:any) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
     res.status(500).json({
       success: false,
       message: 'User not found!',
@@ -110,10 +110,27 @@ const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
+const addOrder = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  const order = req.body.order;
+  const orderInfo = {
+    order,
+    userId
+  }
+  const result = await UserServices.addOrderIntoDB(orderInfo);
+
+  res.status(200).json({
+    success: true,
+    message: 'Order added successfully',
+    data: result,
+  });
+};
+
 export const UserControllers = {
   createUser,
   getAllUsers,
   getSingleUser,
   updateSingleUser,
-  deleteUser
+  deleteUser,
+  addOrder,
 };

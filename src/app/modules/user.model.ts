@@ -113,8 +113,20 @@ userSchema.pre('save', async function (next) {
 
 //post save middleware / hook
 userSchema.pre('find', function (next) {
-  // console.log(this,'post hook : we saved our data');
   this.find({ isDeleted: { $ne: true } });
+
+  next();
+});
+
+userSchema.pre('findOne', function (next) {
+  this.find({ isDeleted: { $ne: true } });
+
+  next();
+});
+
+userSchema.pre('aggregate', function (next) {
+  // console.log(this.pipeline());
+  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } });
 
   next();
 });
