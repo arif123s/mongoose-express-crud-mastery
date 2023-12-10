@@ -12,9 +12,11 @@ const getAllUsersfromDB = async () => {
 };
 
 const getSingleUserfromDB = async (userId: string) => {
-  // const result = await UserModel.findOne({ userId });
+  const result = await UserModel.findOne({ userId });
 
-  const result = await UserModel.aggregate([{ $match: { id:userId } }]);
+  // const result = await UserModel.aggregate([{ $match: { userId:userId } }]);
+    console.log(userId);
+
   return result;
 };
 
@@ -37,6 +39,7 @@ const updateSingleUserfromDB = async (userId: string) => {
 
 const deleteSingleUserfromDB = async (userId: string) => {
   const result = await UserModel.updateOne({ userId }, { isDeleted: true });
+
   return result;
 };
 

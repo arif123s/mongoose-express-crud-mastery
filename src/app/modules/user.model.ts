@@ -112,6 +112,14 @@ userSchema.pre('save', async function (next) {
 });
 
 //post save middleware / hook
+userSchema.post('save', function (doc,next) {
+doc.password='';
+
+next();
+});
+
+
+// Query midddleware
 userSchema.pre('find', function (next) {
   this.find({ isDeleted: { $ne: true } });
 
@@ -125,10 +133,13 @@ userSchema.pre('findOne', function (next) {
 });
 
 userSchema.pre('aggregate', function (next) {
-  // console.log(this.pipeline());
   this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } });
 
   next();
 });
+
+
+
+
 
 export const UserModel = model<User>('User', userSchema);

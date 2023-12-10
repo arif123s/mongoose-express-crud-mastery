@@ -66,8 +66,8 @@ const getSingleUser = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: 'User not found!',
-      data: err,
+      message: err.message || 'Something went wrong!',
+      error: err,
     });
   }
 };
