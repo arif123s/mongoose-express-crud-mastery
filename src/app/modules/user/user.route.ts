@@ -7,7 +7,7 @@ router.post('/create-user', UserControllers.createUser);
 
 router.get('/:userId', UserControllers.getSingleUser);
 
-router.put('/:userId', UserControllers.updateSingleUser);
+// router.put('/:userId', UserControllers.updateSingleUser);
 
 router.delete('/:userId', UserControllers.deleteUser);
 

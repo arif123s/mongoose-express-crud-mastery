@@ -20,22 +20,18 @@ const getSingleUserfromDB = async (userId: string) => {
   return result;
 };
 
-const updateSingleUserfromDB = async (userId: string) => {
-  const filter = { userId: userId };
-  const update = { $set: { user: 'VALUE' } };
+// const updateSingleUserfromDB = async (userId: string) => {
 
-  UserModel.updateOne(
-    filter,
-    update,
-    //  (err:string, result)=> {
-    //   if (err) {
-    //     console.error('Error updating document:', err);
-    //   } else {
-    //     console.log('Update result:', result);
-    //   }
-    // },
-  );
-};
+//   const result = await UserModel.updateOne({userId})
+//   const filter = { userId: userId };
+//   const update = { $set: { user: 'VALUE' } };
+
+//   UserModel.updateOne(
+//     filter,
+//     update,
+//   );
+
+// };
 
 const deleteSingleUserfromDB = async (userId: string) => {
   const result = await UserModel.updateOne({ userId }, { isDeleted: true });
@@ -45,9 +41,14 @@ const deleteSingleUserfromDB = async (userId: string) => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const addOrderIntoDB = async (orderInfo: any) => {
+ 
   const result = await UserModel.updateOne(
     { userId: orderInfo.userId },
-    { orders: orderInfo.order },
+    {
+      $addToSet: {
+        orders: orderInfo.order,
+      },
+    },
   );
 
   return result;
@@ -57,7 +58,6 @@ export const UserServices = {
   createUserIntoDB,
   getAllUsersfromDB,
   getSingleUserfromDB,
-  updateSingleUserfromDB,
   deleteSingleUserfromDB,
   addOrderIntoDB,
 };

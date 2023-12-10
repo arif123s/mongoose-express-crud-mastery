@@ -72,24 +72,24 @@ const getSingleUser = async (req: Request, res: Response) => {
   }
 };
 
-const updateSingleUser = async (req: Request, res: Response) => {
-  try {
-    const { userId } = req.params;
-    const result = await UserServices.updateSingleUserfromDB(userId);
+// const updateSingleUser = async (req: Request, res: Response) => {
+//   try {
+//     const { userId } = req.params;
+//     const result = await UserServices.updateSingleUserfromDB(userId);
 
-    res.status(200).json({
-      success: true,
-      message: 'User is updated successfully',
-      data: result,
-    });
-  } catch (err) {
-    res.status(500).json({
-      success: false,
-      message: 'Something went wrong!',
-      data: err,
-    });
-  }
-};
+//     res.status(200).json({
+//       success: true,
+//       message: 'User is updated successfully',
+//       data: result,
+//     });
+//   } catch (err) {
+//     res.status(500).json({
+//       success: false,
+//       message: 'Something went wrong!',
+//       data: err,
+//     });
+//   }
+// };
 
 const deleteUser = async (req: Request, res: Response) => {
   try {
@@ -115,8 +115,8 @@ const addOrder = async (req: Request, res: Response) => {
   const order = req.body.order;
   const orderInfo = {
     order,
-    userId
-  }
+    userId,
+  };
   const result = await UserServices.addOrderIntoDB(orderInfo);
 
   res.status(200).json({
@@ -130,7 +130,7 @@ export const UserControllers = {
   createUser,
   getAllUsers,
   getSingleUser,
-  updateSingleUser,
+  // updateSingleUser,
   deleteUser,
   addOrder,
 };
