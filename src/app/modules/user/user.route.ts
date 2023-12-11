@@ -17,7 +17,7 @@ router.put('/:userId/order', UserControllers.addOrder);
 
 router.get('/:userId/orders', UserControllers.getOrders);
 
-router.get('/api/users/:userId/orders/total-price', UserControllers.getOrdersTotalPrice);
+router.get('/:userId/orders/total-price', UserControllers.getOrdersTotalPrice);
 
 router.get('/', UserControllers.getAllUsers);
 

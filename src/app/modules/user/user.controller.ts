@@ -149,14 +149,12 @@ const getOrders = async (req: Request, res: Response) => {
 const getOrdersTotalPrice = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
-  console.log(userId);
-
     const result = await UserServices.getOrdersTotalPricefromDB(userId);
 
     res.status(200).json({
       success: true,
       message: 'Orders are retrieved successfully',
-      data: { orders: result?.orders },
+      data:  result ,
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {

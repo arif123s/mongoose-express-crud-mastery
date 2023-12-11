@@ -56,16 +56,23 @@ const addOrderIntoDB = async (orderInfo: any) => {
 const getOrdersfromDB = async (userId: string) => {
   const result = await UserModel.findOne({ userId });
 
-  console.log(result);
-
   return result;
 };
 
 const getOrdersTotalPricefromDB = async (userId: string) => {
-  const result = await UserModel.findOne({ userId });
+  // const result = await UserModel.findOne({ userId });
 
+  const result = await UserModel.aggregate([
+    { $match: { userId: Number(userId) } },
+    { $unwind: '$orders' },
+    {
+      $group: {
+        _id: '$userId', 
+        totalOrderPrice: { $sum: '$orders.price' }, 
+      },
+    },
+  ]);
   console.log(result);
-
   return result;
 };
 
