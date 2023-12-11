@@ -75,18 +75,18 @@ const userSchema = new Schema<User>({
   email: {
     type: String,
     required: [true, 'Email is required'],
-    // validate:{
-    //   validator:(value:string)=>validator.isEmail(value),
-    //   message:'{VALUE} is not a valid email type'
-    // }
   },
+  // isActive: {
+  //   type: String,
+  //   enum: {
+  //     values: ['active', 'inActive'],
+  //     message: 'Status must be either "active" or "inActive"',
+  //   },
+  //   required: [true, 'isActive is required'],
+  // },
   isActive: {
-    type: String,
-    enum: {
-      values: ['active', 'inActive'],
-      message: 'Status must be either "active" or "inActive"',
-    },
-    required: [true, 'isActive is required'],
+    type: Boolean,
+    default: true,
   },
   hobbies: { type: [String], required: [true, 'Hobbies is required'] },
   address: {

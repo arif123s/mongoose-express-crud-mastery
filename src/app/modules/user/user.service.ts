@@ -15,7 +15,7 @@ const getSingleUserfromDB = async (userId: string) => {
   const result = await UserModel.findOne({ userId });
 
   // const result = await UserModel.aggregate([{ $match: { userId:userId } }]);
-    console.log(userId);
+  console.log(userId);
 
   return result;
 };
@@ -41,7 +41,6 @@ const deleteSingleUserfromDB = async (userId: string) => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const addOrderIntoDB = async (orderInfo: any) => {
- 
   const result = await UserModel.updateOne(
     { userId: orderInfo.userId },
     {
@@ -54,10 +53,28 @@ const addOrderIntoDB = async (orderInfo: any) => {
   return result;
 };
 
+const getOrdersfromDB = async (userId: string) => {
+  const result = await UserModel.findOne({ userId });
+
+  console.log(result);
+
+  return result;
+};
+
+const getOrdersTotalPricefromDB = async (userId: string) => {
+  const result = await UserModel.findOne({ userId });
+
+  console.log(result);
+
+  return result;
+};
+
 export const UserServices = {
   createUserIntoDB,
   getAllUsersfromDB,
   getSingleUserfromDB,
   deleteSingleUserfromDB,
   addOrderIntoDB,
+  getOrdersfromDB,
+  getOrdersTotalPricefromDB,
 };
