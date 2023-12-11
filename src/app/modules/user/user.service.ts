@@ -20,18 +20,16 @@ const getSingleUserfromDB = async (userId: string) => {
   return result;
 };
 
-// const updateSingleUserfromDB = async (userId: string) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const updateSingleUserfromDB = async (updateUserInfo: any) => {
+  const result = await UserModel.updateOne(
+    { userId: updateUserInfo.userId },
+    { $set: updateUserInfo.user },
+  );
+  console.log(result);
 
-//   const result = await UserModel.updateOne({userId})
-//   const filter = { userId: userId };
-//   const update = { $set: { user: 'VALUE' } };
-
-//   UserModel.updateOne(
-//     filter,
-//     update,
-//   );
-
-// };
+  return result;
+};
 
 const deleteSingleUserfromDB = async (userId: string) => {
   const result = await UserModel.updateOne({ userId }, { isDeleted: true });
@@ -60,19 +58,17 @@ const getOrdersfromDB = async (userId: string) => {
 };
 
 const getOrdersTotalPricefromDB = async (userId: string) => {
-  // const result = await UserModel.findOne({ userId });
-
   const result = await UserModel.aggregate([
     { $match: { userId: Number(userId) } },
     { $unwind: '$orders' },
     {
       $group: {
-        _id: '$userId', 
-        totalOrderPrice: { $sum: '$orders.price' }, 
+        _id: '$userId',
+        totalOrderPrice: { $sum: '$orders.price' },
       },
     },
   ]);
-  console.log(result);
+
   return result;
 };
 
@@ -80,6 +76,7 @@ export const UserServices = {
   createUserIntoDB,
   getAllUsersfromDB,
   getSingleUserfromDB,
+  updateSingleUserfromDB,
   deleteSingleUserfromDB,
   addOrderIntoDB,
   getOrdersfromDB,

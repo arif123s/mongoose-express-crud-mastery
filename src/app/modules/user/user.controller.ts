@@ -72,24 +72,29 @@ const getSingleUser = async (req: Request, res: Response) => {
   }
 };
 
-// const updateSingleUser = async (req: Request, res: Response) => {
-//   try {
-//     const { userId } = req.params;
-//     const result = await UserServices.updateSingleUserfromDB(userId);
+const updateSingleUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+       const { user } = req.body;
+        const updateUserInfo = {
+          user,
+          userId,
+        };
+    const result = await UserServices.updateSingleUserfromDB(updateUserInfo);
 
-//     res.status(200).json({
-//       success: true,
-//       message: 'User is updated successfully',
-//       data: result,
-//     });
-//   } catch (err) {
-//     res.status(500).json({
-//       success: false,
-//       message: 'Something went wrong!',
-//       data: err,
-//     });
-//   }
-// };
+    res.status(200).json({
+      success: true,
+      message: 'User is updated successfully',
+      data: result,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong!',
+      data: err,
+    });
+  }
+};
 
 const deleteUser = async (req: Request, res: Response) => {
   try {
@@ -153,8 +158,8 @@ const getOrdersTotalPrice = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: 'Orders are retrieved successfully',
-      data:  result ,
+      message: 'Orders total price calcutated successfully',
+      data: { totalPrice: result[0]?.totalOrderPrice },
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
@@ -170,7 +175,7 @@ export const UserControllers = {
   createUser,
   getAllUsers,
   getSingleUser,
-  // updateSingleUser,
+  updateSingleUser,
   deleteUser,
   addOrder,
   getOrders,
