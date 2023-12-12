@@ -44,34 +44,34 @@ API (GET): http://localhost:5000/api/users/1
 API (PUT): http://localhost:5000/api/users/1
 Data format:
 
-{
- "user":{
-   "userId": 1,
-   "username": "johnny_depp",
-   "password": "mypassword",
-   "fullName": {
-     "firstName": "Johnny",
-     "lastName": "Depp"
-   },
-   "age": 35,
-   "email": "johnny.depp@example.com",
-   "isActive": true,
-   "hobbies": ["reading", "traveling"],
-   "address": {
-     "street": "123 Main Street",
-     "city": "Exampleville",
-     "country": "Exampleland"
-   },
-   "orders": [
-     {
-      "orderId": 101,
-      "product": "Laptop",
-      "quantity": 2,
-      "price": 1200
-     }
-   ],
-   "isDeleted": false
-  }
+ {
+   "user":{
+      "userId": 1,
+      "username": "johnny_depp",
+      "password": "mypassword",
+      "fullName": {
+      "firstName": "Johnny",
+      "lastName": "Depp"
+      },
+      "age": 35,
+      "email": "johnny.depp@example.com",
+      "isActive": true,
+      "hobbies": ["reading", "traveling"],
+      "address": {
+      "street": "123 Main Street",
+      "city": "Exampleville",
+      "country": "Exampleland"
+      },
+      "orders": [
+      {
+        "orderId": 101,
+        "product": "Laptop",
+        "quantity": 2,
+        "price": 1200
+      }
+      ],
+      "isDeleted": false
+   }
 }
 
 5. Delete a user
@@ -94,8 +94,8 @@ Data format:
     }
 }
 
-3. Retrieve all orders for a specific user
+2. Retrieve all orders for a specific user
 API (GET): http://localhost:5000/api/users/1/orders
 
-4. Calculate Total Price of Orders for a Specific User
+3. Calculate Total Price of Orders for a Specific User
 API (GET): http://localhost:5000/api/users/2/orders/total-price
