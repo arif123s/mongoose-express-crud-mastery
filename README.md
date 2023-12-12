@@ -3,7 +3,7 @@
 1. To create a user follow the format:
    API (POST): http://localhost:5000/api/users/create-user
    JSON format:
-
+````
    {
      "user":{
         "userId": 1,
@@ -33,7 +33,7 @@
      "isDeleted": false
    }
 }
-
+````
 2. Retrieve a list of all users use this
 API (GET): http://localhost:5000/api/users
 
@@ -43,7 +43,7 @@ API (GET): http://localhost:5000/api/users/1
 4. To update user information
 API (PUT): http://localhost:5000/api/users/1
 Data format:
-
+````
  {
    "user":{
       "userId": 1,
@@ -73,7 +73,7 @@ Data format:
       "isDeleted": false
    }
 }
-
+````
 5. Delete a user
 API (DELETE): http://localhost:5000/api/users/1
 
@@ -84,7 +84,8 @@ API (DELETE): http://localhost:5000/api/users/1
 
 1. Add New Product in Order
 API (PUT):  http://localhost:5000/api/users/1/order
-Data format: 
+Data format:
+````
 {
     "order":  {
       "orderId": 104,
@@ -93,7 +94,7 @@ Data format:
       "price": 1000
     }
 }
-
+````
 2. Retrieve all orders for a specific user
 API (GET): http://localhost:5000/api/users/1/orders
 
