@@ -57,11 +57,21 @@ const getSingleUser = async (req: Request, res: Response) => {
     const { userId } = req.params;
     const result = await UserServices.getSingleUserfromDB(userId);
 
-    res.status(200).json({
-      success: true,
-      message: 'User fetched successfully!',
-      data: result,
-    });
+    if(result){
+      res.status(200).json({
+        success: true,
+        message: 'User fetched successfully!',
+        data: result,
+      });
+    }
+    else{
+      {
+        res.status(500).json({
+          success: false,
+          message: 'Something went wrong!',
+        });
+      }
+    }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     res.status(500).json({
@@ -110,25 +120,33 @@ const deleteUser = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: 'Something went wrong!',
-      data: err,
+      data: null,
     });
   }
 };
 
 const addOrder = async (req: Request, res: Response) => {
-  const { userId } = req.params;
-  const order = req.body.order;
-  const orderInfo = {
-    order,
-    userId,
-  };
-  const result = await UserServices.addOrderIntoDB(orderInfo);
+  try {
+    const { userId } = req.params;
+    const order = req.body.order;
+    const orderInfo = {
+      order,
+      userId,
+    };
+    const result = await UserServices.addOrderIntoDB(orderInfo);
 
-  res.status(200).json({
-    success: true,
-    message: 'Order created successfully!',
-    data: result,
-  });
+    res.status(200).json({
+      success: true,
+      message: 'Order created successfully!',
+      data: result,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong!',
+      data: err,
+    });
+  }
 };
 
 const getOrders = async (req: Request, res: Response) => {
@@ -165,8 +183,11 @@ const getOrdersTotalPrice = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || 'Something went wrong!',
-      error: err,
+      message: 'User not found',
+      error: {
+        code: 404,
+        description: 'User not found!',
+      },
     });
   }
 };
