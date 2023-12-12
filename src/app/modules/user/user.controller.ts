@@ -21,7 +21,7 @@ const createUser = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: 'User is created successfully',
+      message: 'User created successfully!',
       data: result,
     });
   } catch (err) {
@@ -39,7 +39,7 @@ const getAllUsers = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: 'Users are retrieved successfully',
+      message: 'Users fetched successfully!',
       data: result,
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -59,7 +59,7 @@ const getSingleUser = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: 'User is retrieved successfully',
+      message: 'User fetched successfully!',
       data: result,
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -84,7 +84,7 @@ const updateSingleUser = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: 'User is updated successfully',
+      message: 'User updated successfully!',
       data: result,
     });
   } catch (err) {
@@ -103,7 +103,7 @@ const deleteUser = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: 'User is deleted successfully',
+      message: 'User deleted successfully!',
       data: result,
     });
   } catch (err) {
@@ -138,7 +138,7 @@ const getOrders = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: 'Orders are retrieved successfully',
+      message: 'Orders fetched successfully',
       data: {orders:result?.orders},
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
