@@ -1,37 +1,37 @@
-** Instructions to run the application loacally
+# Instructions to run the application loacally
 
 1. To create a user follow the format:
    API (POST): http://localhost:5000/api/users/create-user
    JSON format:
 
-{
- "user":{
-   "userId": 1,
-   "username": "john_doe",
-   "password": "mypassword",
-   "fullName": {
-     "firstName": "John",
-     "lastName": "Doe"
-   },
-   "age": 35,
-   "email": "john.doe@example.com",
-   "isActive": true,
-   "hobbies": ["reading", "traveling"],
-   "address": {
-     "street": "123 Main Street",
-     "city": "Exampleville",
-     "country": "Exampleland"
-   },
-   "orders": [
-     {
-      "orderId": 101,
-      "product": "Laptop",
-      "quantity": 2,
-      "price": 1200
-     }
-   ],
-   "isDeleted": false
-  }
+   {
+     "user":{
+        "userId": 1,
+        "username": "john_doe",
+        "password": "mypassword",
+        "fullName": {
+        "firstName": "John",
+        "lastName": "Doe"
+        },
+       "age": 35,
+       "email": "john.doe@example.com",
+       "isActive": true,
+       "hobbies": ["reading", "traveling"],
+       "address": {
+       "street": "123 Main Street",
+       "city": "Exampleville",
+       "country": "Exampleland"
+       },
+       "orders": [
+       {
+        "orderId": 101,
+        "product": "Laptop",
+        "quantity": 2,
+        "price": 1200
+       }
+      ],
+     "isDeleted": false
+   }
 }
 
 2. Retrieve a list of all users use this
@@ -80,7 +80,7 @@ API (DELETE): http://localhost:5000/api/users/1
 * Note : If you delete a user it won't appear in the users list
 * After deleting the user you have to add another user to check further section
 
-** Bonus section:
+## Bonus section:
 
 1. Add New Product in Order
 API (PUT):  http://localhost:5000/api/users/1/order
