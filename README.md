@@ -74,7 +74,7 @@ Data format:
   }
 }
 
-6. Delete a user
+5. Delete a user
 API (DELETE): http://localhost:5000/api/users/1
 
 * Note : If you delete a user it won't appear in the users list
