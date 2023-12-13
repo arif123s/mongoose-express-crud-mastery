@@ -37,6 +37,8 @@ const getAllUsers = async (req: Request, res: Response) => {
   try {
     const result = await UserServices.getAllUsersfromDB();
 
+    
+
     res.status(200).json({
       success: true,
       message: 'Users fetched successfully!',
@@ -109,18 +111,18 @@ const updateSingleUser = async (req: Request, res: Response) => {
 const deleteUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
-    const result = await UserServices.deleteSingleUserfromDB(userId);
+    await UserServices.deleteSingleUserfromDB(userId);
 
     res.status(200).json({
       success: true,
       message: 'User deleted successfully!',
-      data: result,
+      data: null,
     });
   } catch (err) {
     res.status(500).json({
       success: false,
       message: 'Something went wrong!',
-      data: null,
+      data: err,
     });
   }
 };
@@ -133,12 +135,12 @@ const addOrder = async (req: Request, res: Response) => {
       order,
       userId,
     };
-    const result = await UserServices.addOrderIntoDB(orderInfo);
+    await UserServices.addOrderIntoDB(orderInfo);
 
     res.status(200).json({
       success: true,
       message: 'Order created successfully!',
-      data: result,
+      data: null,
     });
   } catch (err) {
     res.status(500).json({

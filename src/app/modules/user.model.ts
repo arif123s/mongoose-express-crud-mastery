@@ -115,7 +115,15 @@ userSchema.pre('save', async function (next) {
 userSchema.post('save', function (doc,next) {
 doc.password='';
 
+
 next();
+});
+
+userSchema.set('toJSON', {
+  transform: (doc, ret) => {
+    delete ret.password;
+    return ret;
+  },
 });
 
 
