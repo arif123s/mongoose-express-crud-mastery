@@ -37,8 +37,6 @@ const getAllUsers = async (req: Request, res: Response) => {
   try {
     const result = await UserServices.getAllUsersfromDB();
 
-    
-
     res.status(200).json({
       success: true,
       message: 'Users fetched successfully!',
@@ -59,18 +57,17 @@ const getSingleUser = async (req: Request, res: Response) => {
     const { userId } = req.params;
     const result = await UserServices.getSingleUserfromDB(userId);
 
-    if(result){
+    if (result) {
       res.status(200).json({
         success: true,
         message: 'User fetched successfully!',
         data: result,
       });
-    }
-    else{
+    } else {
       {
         res.status(500).json({
           success: false,
-          message: 'Something went wrong!',
+          message: 'User not found!',
         });
       }
     }
@@ -87,11 +84,11 @@ const getSingleUser = async (req: Request, res: Response) => {
 const updateSingleUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
-       const { user } = req.body;
-        const updateUserInfo = {
-          user,
-          userId,
-        };
+    const { user } = req.body;
+    const updateUserInfo = {
+      user,
+      userId,
+    };
     const result = await UserServices.updateSingleUserfromDB(updateUserInfo);
 
     res.status(200).json({
@@ -159,7 +156,7 @@ const getOrders = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: 'Orders fetched successfully',
-      data: {orders:result?.orders},
+      data: { orders: result?.orders },
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
@@ -175,12 +172,24 @@ const getOrdersTotalPrice = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
     const result = await UserServices.getOrdersTotalPricefromDB(userId);
-
-    res.status(200).json({
-      success: true,
-      message: 'Orders total price calcutated successfully',
-      data: { totalPrice: result[0]?.totalOrderPrice },
-    });
+console.log(result)
+    if(result){
+      res.status(200).json({
+        success: true,
+        message: 'Orders total price calcutated successfully',
+        data: { totalPrice: result[0]?.totalOrderPrice },
+      });
+    }
+    else{
+       res.status(500).json({
+         success: false,
+         message: 'User not found',
+         error: {
+           code: 404,
+           description: 'User not found!',
+         },
+       });
+    }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     res.status(500).json({
@@ -202,5 +211,5 @@ export const UserControllers = {
   deleteUser,
   addOrder,
   getOrders,
-  getOrdersTotalPrice
+  getOrdersTotalPrice,
 };
